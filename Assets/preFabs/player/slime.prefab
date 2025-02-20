@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 553019109924758418}
   - component: {fileID: 2598200056618221134}
   - component: {fileID: 4490503081518948990}
-  - component: {fileID: 7334230770222371971}
-  m_Layer: 0
+  - component: {fileID: 4549168553120765551}
+  m_Layer: 7
   m_Name: main_body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2539f5c27753b314890c50b962a764cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7334230770222371971
+  speed: 10.27
+  jumpForce: 61.4
+--- !u!114 &4549168553120765551
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,13 +121,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4041592942951895144}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbf69104086ea134785edc4a01b6f0f6, type: 3}
+  m_Script: {fileID: 11500000, guid: d31ae53f6cd570544be169bb107f24f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupRange: 1.75
-  pickupLayer:
-    serializedVersion: 2
-    m_Bits: 64
+  bullet: {fileID: 4467788433376228369, guid: cc7c0122b731142428480da7c539e69b, type: 3}
+  bulletSpeed: 40
+  fireRate: 0.2
 --- !u!1 &4103837069230585113
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,7 +139,8 @@ GameObject:
   - component: {fileID: 2463296040530674848}
   - component: {fileID: 4773422724996991698}
   - component: {fileID: 8970654038963585771}
-  m_Layer: 0
+  - component: {fileID: 8302059007113709733}
+  m_Layer: 7
   m_Name: slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +158,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.38807416, y: 2.024823, z: 0.091520414}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3170432597783743363}
   m_Father: {fileID: 0}
@@ -227,3 +229,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   markerPrefab: {fileID: 7813830347514843649, guid: 084f13a458241e24c829bc1d9647069c, type: 3}
+--- !u!114 &8302059007113709733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4103837069230585113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54349d31c6c0de044ad6ab03711acfae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possessRange: 8
+  EnemyLayer:
+    serializedVersion: 2
+    m_Bits: 0

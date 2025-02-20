@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 602310828722980753}
   - component: {fileID: 3589520408661920968}
   - component: {fileID: 9148561947199759326}
-  m_Layer: 0
+  - component: {fileID: 8190907423290164534}
+  m_Layer: 7
   m_Name: vetex
-  m_TagString: Untagged
+  m_TagString: Vertex
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,8 +82,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 1
-  m_Mass: 0.19634955
+  m_UseAutoMass: 0
+  m_Mass: 0.05
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
@@ -123,3 +124,15 @@ HingeJoint2D:
   m_AngleLimits:
     m_LowerAngle: 0
     m_UpperAngle: 359
+--- !u!114 &8190907423290164534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7813830347514843649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e43bd66a87ef1fc46afe8614e00ed6b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

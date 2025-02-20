@@ -12,21 +12,25 @@ public class spawner : MonoBehaviour
     void Start()
     {
         spawnTime = spawnRate;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        spawnTime -= Time.deltaTime;
-        if (spawnTime <= 0)
-        {
-            if (GameObject.FindGameObjectsWithTag("PickUp").Length <= maxSpawns)
-            {
-                Vector3 temp = new Vector3(Random.Range(-radius, radius), 0, 0);
-                Vector3 spawnPosition = transform.TransformPoint(temp);
-                Instantiate(spawn, spawnPosition, Quaternion.identity);
-            }
-            spawnTime = spawnRate;
-        }
+        // spawnTime -= Time.deltaTime;
+        // spawn.GetComponent<rochThrow>().enabled = false;
+        // if (spawnTime <= 0)
+        // {
+        //     if (GameObject.FindGameObjectsWithTag(spawn.tag).Length <= maxSpawns)
+        //     {
+
+        //         Vector3 temp = new Vector3(Random.Range(-radius, radius), 0, 0);
+        //         Vector3 spawnPosition = transform.TransformPoint(temp);
+        //         Instantiate(spawn, spawnPosition, Quaternion.identity);
+                
+        //     }
+        //     spawnTime = spawnRate;
+        // }
     }
 }

@@ -59,14 +59,18 @@ public class Health : MonoBehaviour
             gameObject.GetComponent<BatSmallAI>().player = playerController.currentPlayer;
             gameObject.GetComponent<BatSmallAI>().isPursuing = true;
         }
-        StartCoroutine(BlinkEffect());
-        if (currentHealth <= 0)
+        if (!isDead)
+        {
+            StartCoroutine(BlinkEffect());
+        }
+        if (currentHealth <= 0 && !isDead)
         {
             Die();
         }
     }
 
     void Die() {
+
         if (gameObject.GetComponent<KnightAI>() != null) {
             gameObject.GetComponent<KnightAI>().enabled = false;
             animator.SetTrigger("deadAnim");

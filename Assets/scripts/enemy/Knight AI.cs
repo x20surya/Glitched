@@ -20,7 +20,7 @@ public class KnightAI : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    public Transform player;
+    public GameObject player;
 
     public bool isFlipped = false;
 
@@ -138,7 +138,7 @@ public class KnightAI : MonoBehaviour
         {
             LookAtPlayer();
 
-            if (Vector2.Distance(player.position, rb.position) <= attackRange)
+            if (Vector2.Distance(player.transform.position, rb.position) <= attackRange)
             {
 
                 //Attack
@@ -176,7 +176,7 @@ public class KnightAI : MonoBehaviour
     IEnumerator FireBulletAtIntervals()
     {
 
-        float angleBWPlayer = (180 / Mathf.PI) * Mathf.Atan2((player.position.y - transform.position.y), (player.position.x - transform.position.x));
+        float angleBWPlayer = (180 / Mathf.PI) * Mathf.Atan2((player.transform.position.y - transform.position.y), (player.transform.position.x - transform.position.x));
         Instantiate(bullet, firePoint.position, Quaternion.Euler(0, 0, angleBWPlayer));
         yield return new WaitForSeconds(bulletInterval);
         bulletCoroutine = null;
@@ -198,11 +198,11 @@ public class KnightAI : MonoBehaviour
     void LookAtPlayer()
     {
 
-        if (transform.position.x > player.position.x && !isFlipped)
+        if (transform.position.x > player.transform.position.x && !isFlipped)
         {
             Flip();
         }
-        else if (transform.position.x < player.position.x && isFlipped)
+        else if (transform.position.x < player.transform.position.x && isFlipped)
         {
             Flip();
         }
@@ -220,7 +220,7 @@ public class KnightAI : MonoBehaviour
     {
         bool playerDetected = false;
 
-        Vector2 direction = player.position - visionCheck.position;
+        Vector2 direction = player.transform.position - visionCheck.position;
 
         RaycastHit2D visionCheckinfo = Physics2D.Raycast(visionCheck.position, direction, visionDistance - 1f);
         Debug.DrawLine(visionCheck.position, visionCheckinfo.point);

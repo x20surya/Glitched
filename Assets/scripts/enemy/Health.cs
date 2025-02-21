@@ -12,8 +12,12 @@ public class Health : MonoBehaviour
     public float alertRadius = 10f;
 
     public Animator animator;
+
     public float blinkDuration = 0.1f;
+
     public int blinkCount = 5;
+
+    public PlayerPosition playerController;
 
     public SpriteRenderer spriteRenderer;
 
@@ -28,7 +32,7 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void TakeDamage(int damage)
@@ -42,6 +46,7 @@ public class Health : MonoBehaviour
             {
                 if(x.gameObject.GetComponent<KnightAI>())
                 {
+                    x.gameObject.GetComponent<KnightAI>().player = playerController.currentPlayer;
                     x.gameObject.GetComponent<KnightAI>().isPursuing = true;
                 }
             }

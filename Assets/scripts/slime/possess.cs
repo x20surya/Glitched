@@ -7,6 +7,8 @@ public class possess : MonoBehaviour
     private Transform slime;
     public float possessRange = 8f;
     public LayerMask EnemyLayer;
+
+    public PlayerPosition playerController;
     void Start()
     {
         slime = GameObject.Find("main_body").transform;
@@ -58,6 +60,7 @@ public class possess : MonoBehaviour
             {
                 hitCollider.gameObject.GetComponent<KnightMovement>().enabled = true;
                 hitCollider.gameObject.GetComponent<Health>().currentHealth = hitCollider.gameObject.GetComponent<Health>().maxHealth;
+                playerController.currentPlayer = hitCollider.gameObject;
             }
             hitCollider.gameObject.GetComponent<Unpossess>().enabled = true;
 

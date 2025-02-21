@@ -501,6 +501,10 @@ PrefabInstance:
       propertyPath: slime
       value: 
       objectReference: {fileID: 1676646983}
+    - target: {fileID: 4566296569881743898, guid: 3e46c864d26c7aa4bb0ea1a3d755e330, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 2023038361}
     - target: {fileID: 5437982350899210076, guid: 3e46c864d26c7aa4bb0ea1a3d755e330, type: 3}
       propertyPath: m_LocalPosition.x
       value: 81.4
@@ -541,10 +545,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6716240062329682487, guid: 3e46c864d26c7aa4bb0ea1a3d755e330, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 2023038361}
     - target: {fileID: 8500311754710931191, guid: 3e46c864d26c7aa4bb0ea1a3d755e330, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 505686693}
+      objectReference: {fileID: 927218344}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -800,6 +808,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   blinkDuration: 0.1
   blinkCount: 5
+  playerController: {fileID: 2023038361}
   spriteRenderer: {fileID: 927218356}
 --- !u!212 &927218356
 SpriteRenderer:
@@ -941,6 +950,10 @@ PrefabInstance:
       propertyPath: slime
       value: 
       objectReference: {fileID: 1676646983}
+    - target: {fileID: 4566296569881743898, guid: 3e46c864d26c7aa4bb0ea1a3d755e330, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 2023038361}
     - target: {fileID: 5437982350899210076, guid: 3e46c864d26c7aa4bb0ea1a3d755e330, type: 3}
       propertyPath: m_LocalPosition.x
       value: 92
@@ -981,10 +994,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6716240062329682487, guid: 3e46c864d26c7aa4bb0ea1a3d755e330, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 2023038361}
     - target: {fileID: 8500311754710931191, guid: 3e46c864d26c7aa4bb0ea1a3d755e330, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 505686693}
+      objectReference: {fileID: 927218344}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1775,6 +1792,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPossessed: 0
   slime: {fileID: 0}
+  playerController: {fileID: 0}
 --- !u!1 &2023038358
 GameObject:
   m_ObjectHideFlags: 0
@@ -1785,6 +1803,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2023038360}
   - component: {fileID: 2023038359}
+  - component: {fileID: 2023038361}
   m_Layer: 0
   m_Name: Global State
   m_TagString: Untagged
@@ -1823,6 +1842,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2023038361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023038358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55a52c461dab4f7488831db7c168cc4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPlayer: {fileID: 927218344}
+  whoEnemiesThinkThePlayerIs: {fileID: 927218344}
 --- !u!1001 &8914786473280790081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1931,6 +1964,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 3cd170a84c7975945b66db5a5870f0a8, type: 2}
+    - target: {fileID: 8302059007113709733, guid: ac4be2bd2ceec8c41ae5824800f9a92f, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 2023038361}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

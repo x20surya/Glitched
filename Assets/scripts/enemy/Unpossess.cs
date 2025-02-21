@@ -6,6 +6,7 @@ public class Unpossess : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public bool isPossessed = false;
     public GameObject slime;
+    public PlayerPosition playerController;
     void Start()
     {
         Debug.Log("Enemy Possessed :: " + isPossessed);
@@ -42,6 +43,7 @@ public class Unpossess : MonoBehaviour
         if (GameObject.Find("main_body").GetComponent<MOTION>() != null)
         {
             GameObject.Find("main_body").GetComponent<MOTION>().enabled = true;
+            playerController.currentPlayer = GameObject.Find("main_body");
         }
 
         // pose camera to slime

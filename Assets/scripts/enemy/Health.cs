@@ -55,6 +55,10 @@ public class Health : MonoBehaviour
             gameObject.GetComponent<SpiderSmallAI>().player = playerController.currentPlayer;
             gameObject.GetComponent<SpiderSmallAI>().isPursuing = true;
         }
+        if (gameObject.GetComponent<BatSmallAI>() != null) { 
+            gameObject.GetComponent<BatSmallAI>().player = playerController.currentPlayer;
+            gameObject.GetComponent<BatSmallAI>().isPursuing = true;
+        }
         StartCoroutine(BlinkEffect());
         if (currentHealth <= 0)
         {
@@ -78,7 +82,15 @@ public class Health : MonoBehaviour
         {
             gameObject.GetComponent<SpiderSmallAI>().enabled = false;
             animator.SetTrigger("deadAnim");
-            animator.SetBool("isDead", true) ;
+            animator.SetBool("isDead", true);
+            isDead = true;
+        }
+        if (gameObject.GetComponent<BatSmallAI>()) {
+            gameObject.GetComponent <BatSmallAI>().enabled = false;
+            gameObject.GetComponent<Rigidbody2D>().gravityScale = 1f;
+            gameObject.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+            animator.SetTrigger("deadAnim");
+            animator.SetBool("isDead", true);
             isDead = true;
         }
   

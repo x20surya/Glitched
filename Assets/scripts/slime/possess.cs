@@ -73,6 +73,13 @@ public class possess : MonoBehaviour
                 playerController.isPossesed = true;
                 hitCollider.gameObject.tag = "CurrentPlayer";
             }
+            if (hitCollider.gameObject.GetComponent<BatMovement>()) { 
+                hitCollider.gameObject.GetComponent<BatMovement>().enabled = true;
+                hitCollider.gameObject.GetComponent<Health>().currentHealth = hitCollider.gameObject.GetComponent<Health>().maxHealth;
+                playerController.currentPlayer = hitCollider.gameObject;
+                playerController.isPossesed = true;
+                hitCollider.gameObject.tag = "CurrentPlayer";
+            }
             hitCollider.gameObject.GetComponent<Unpossess>().enabled = true;
 
             hitCollider.gameObject.GetComponent<Rigidbody2D>().mass = 6f; // 5f -> weight of balls

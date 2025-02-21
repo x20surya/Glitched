@@ -5,57 +5,31 @@ using UnityEngine;
 public class KnightAI : MonoBehaviour
 {
     [SerializeField] public float speed;
-
     [SerializeField] public float susSpeed = 5f;
-
     [SerializeField] public float pursuingSpeed;
-
     [SerializeField] public float pursuingTime = 3f;
-
     public Transform visionCheck;
-
     [SerializeField] public float visionDistance = 15f;
-
     [SerializeField] public float visionAngle = 45f;
-
     private Rigidbody2D rb;
-
     public GameObject player;
-
     public bool isFlipped = false;
-
     public bool isPursuing = false;
-
     public bool isSus = false;
-
     public Vector2 susPos = Vector2.zero;
-
     [SerializeField] public float[] patrolPointsX;
-
     [SerializeField] public float patrolingSpeed = 5f;
-
     [SerializeField] public Transform firePoint;
-
     [SerializeField] public GameObject bullet;
-
     [SerializeField] public float bulletInterval = 1f;
-
     int currentPointIndex;
-
     bool once;
-
     private Coroutine stopPursuingCoroutine;
-
     private Coroutine bulletCoroutine;
-
     public float attackRange = 3f;
-
     public Animator animator;
-
     public bool isPossesed = false;
-
     public PlayerPosition playerController;
-
     public LayerMask ignoreLayers;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

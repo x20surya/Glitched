@@ -51,6 +51,10 @@ public class Health : MonoBehaviour
                 }
             }
         }
+        if (gameObject.GetComponent<SpiderSmallAI>() != null) { 
+            gameObject.GetComponent<SpiderSmallAI>().player = playerController.currentPlayer;
+            gameObject.GetComponent<SpiderSmallAI>().isPursuing = true;
+        }
         StartCoroutine(BlinkEffect());
         if (currentHealth <= 0)
         {
@@ -70,7 +74,13 @@ public class Health : MonoBehaviour
             isDead = true;
             Destroy(gameObject);
         }
-        
+        if(gameObject.GetComponent<SpiderSmallAI>() != null)
+        {
+            gameObject.GetComponent<SpiderSmallAI>().enabled = false;
+            animator.SetTrigger("deadAnim");
+            animator.SetBool("isDead", true) ;
+            isDead = true;
+        }
   
     }
 

@@ -157,23 +157,23 @@ public class KnightAI : MonoBehaviour
             }
             else
             {
-                //if (player.position.y - transform.position.y > 3f)
-                //{
+                if (player.transform.position.y - transform.position.y > 3f)
+                {
+                    animator.SetTrigger("throwing");
+                    rb.linearVelocity = Vector2.zero;
 
-                //    rb.linearVelocity = Vector2.zero;
+                    if (bulletCoroutine == null)
+                    {
+                        bulletCoroutine = StartCoroutine(FireBulletAtIntervals());
+                    }
 
-                //    if (bulletCoroutine == null)
-                //    {
-                //        bulletCoroutine = StartCoroutine(FireBulletAtIntervals());
-                //    }
+                }
+                else
+                {
+                    rb.linearVelocity = new Vector2(pursuingSpeed, rb.linearVelocity.y);
+                }
 
-                //}
-                //else
-                //{
-                    
-                //}
-
-                rb.linearVelocity = new Vector2(pursuingSpeed, rb.linearVelocity.y);
+                
             }
 
         }

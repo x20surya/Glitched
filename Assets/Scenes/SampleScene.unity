@@ -1019,6 +1019,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2023038361}
     - target: {fileID: 8500311754710931191, guid: 3e46c864d26c7aa4bb0ea1a3d755e330, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 4773472900903174413, guid: fe19eb6242a048c4c973e2ec4ffcbac2, type: 3}
+    - target: {fileID: 8500311754710931191, guid: 3e46c864d26c7aa4bb0ea1a3d755e330, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 927218344}

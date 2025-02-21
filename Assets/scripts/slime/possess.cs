@@ -46,12 +46,19 @@ public class possess : MonoBehaviour
     void Possess(Collider2D hitCollider)
     {
 
-        if (hitCollider.gameObject.GetComponent<Enemy>().isDead)
+        if (hitCollider.gameObject.GetComponent<Health>().isDead)
         {
             Debug.Log("Possess: " + hitCollider.name);
             // enable move script in enemy
-            hitCollider.gameObject.GetComponent<Enemy>().enabled = false; // need-wise
-            hitCollider.gameObject.GetComponent<MOTION>().enabled = true;
+            if (hitCollider.gameObject.GetComponent<MOTION>())
+            {
+                hitCollider.gameObject.GetComponent<MOTION>().enabled = true;
+            }
+            if (hitCollider.gameObject.GetComponent<KnightMovement>())
+            {
+                hitCollider.gameObject.GetComponent<KnightMovement>().enabled = true;
+                hitCollider.gameObject.GetComponent<Health>().currentHealth = hitCollider.gameObject.GetComponent<Health>().maxHealth;
+            }
             hitCollider.gameObject.GetComponent<Unpossess>().enabled = true;
 
             hitCollider.gameObject.GetComponent<Rigidbody2D>().mass = 6f; // 5f -> weight of balls

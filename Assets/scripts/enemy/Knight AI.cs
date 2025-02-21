@@ -1,9 +1,12 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class KnightAI : MonoBehaviour
 {
     [SerializeField] public float speed;
+
+    [SerializeField] public float susSpeed = 5f;
 
     [SerializeField] public float pursuingSpeed;
 
@@ -21,9 +24,13 @@ public class KnightAI : MonoBehaviour
 
     public Transform player;
 
-    bool isFlipped = false;
+    public bool isFlipped = false;
 
-    bool isPursuing = false;
+    public bool isPursuing = false;
+
+    public bool isSus = false;
+
+    public Vector2 susPos = Vector2.zero;
 
     [SerializeField] public float[] patrolPointsX;
 
@@ -43,21 +50,27 @@ public class KnightAI : MonoBehaviour
 
     private Coroutine bulletCoroutine;
 
+    public float attackRange = 3f;
 
-
-
+    public Animator animator;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
 
     void Update()
     {
-        Debug.Log(isPursuing);
+
+
+        animator.SetBool("isPursuing", isPursuing);
+
+        Debug.Log(isSus);
+        Debug.Log(susPos);
 
         if (isPursuing == false)
         {
@@ -72,7 +85,18 @@ public class KnightAI : MonoBehaviour
             //    Flip();
             //}
 
-            if (transform.position != new Vector3(patrolPointsX[currentPointIndex], transform.position.y, transform.position.z))
+            if (isSus && susPos != Vector2.zero && transform.position != new Vector3(susPos.x, transform.position.y, transform.position.z))
+            {
+                LookAtPos(susPos);
+                transform.position = Vector2.MoveTowards(transform.position, new Vector2(susPos.x, transform.position.y), susSpeed * Time.deltaTime);
+            }
+            else if (isSus && susPos != Vector2.zero && transform.position == new Vector3(susPos.x, transform.position.y, transform.position.z))
+            {
+                isSus = false;
+                susPos = Vector2.zero;
+            }
+
+            if (transform.position != new Vector3(patrolPointsX[currentPointIndex], transform.position.y, transform.position.z) && !isSus)
             {
 
                 rb.linearVelocity = Vector3.zero;
@@ -89,7 +113,7 @@ public class KnightAI : MonoBehaviour
                 transform.position = Vector2.MoveTowards(transform.position, new Vector2(patrolPointsX[currentPointIndex], transform.position.y), patrolingSpeed * Time.deltaTime);
 
             }
-            else
+            else if(transform.position == new Vector3(patrolPointsX[currentPointIndex], transform.position.y, transform.position.z) && !isSus)
             {
 
                 if (once == false)
@@ -115,24 +139,39 @@ public class KnightAI : MonoBehaviour
         else if (isPursuing)
         {
             LookAtPlayer();
-            if (player.position.y - transform.position.y > 3f)
+
+            if (Vector2.Distance(player.position, rb.position) <= attackRange)
             {
+
+                //Attack
                 rb.linearVelocity = Vector2.zero;
-
-                if (bulletCoroutine == null)
-                {
-                    bulletCoroutine = StartCoroutine(FireBulletAtIntervals());
-                }
-
+                animator.SetTrigger("Attack");
+                Debug.Log("In range");
             }
             else
             {
+                //if (player.position.y - transform.position.y > 3f)
+                //{
+
+                //    rb.linearVelocity = Vector2.zero;
+
+                //    if (bulletCoroutine == null)
+                //    {
+                //        bulletCoroutine = StartCoroutine(FireBulletAtIntervals());
+                //    }
+
+                //}
+                //else
+                //{
+                    
+                //}
+
                 rb.linearVelocity = new Vector2(pursuingSpeed, rb.linearVelocity.y);
             }
 
         }
 
-        DetectInCone();
+        DetectEnemy();
 
     }
 
@@ -144,6 +183,18 @@ public class KnightAI : MonoBehaviour
         yield return new WaitForSeconds(bulletInterval);
         bulletCoroutine = null;
 
+    }
+
+    void LookAtPos(Vector2 pos)
+    {
+        if (transform.position.x > pos.x && !isFlipped)
+        {
+            Flip();
+        }
+        else if (transform.position.x < pos.x && isFlipped)
+        {
+            Flip();
+        }
     }
 
     void LookAtPlayer()
@@ -167,52 +218,79 @@ public class KnightAI : MonoBehaviour
         pursuingSpeed *= -1;
     }
 
-    void DetectInCone()
+    void DetectEnemy()
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(visionCheck.position, visionDistance, playerLayer);
-
         bool playerDetected = false;
 
-        foreach (Collider2D hit in hits)
+        Vector2 direction = player.position - visionCheck.position;
+
+        RaycastHit2D visionCheckinfo = Physics2D.Raycast(visionCheck.position, direction, visionDistance - 1f);
+        Debug.DrawLine(visionCheck.position, visionCheckinfo.point);
+
+        if (visionCheckinfo.collider)
         {
-            Vector2 directionToTarget = (hit.transform.position - visionCheck.position).normalized;
-            float angleToTarget = Vector2.Angle(visionCheck.right, directionToTarget);
-
-            if (angleToTarget < visionAngle / 2)
+            if (visionCheckinfo.collider.gameObject.layer == 7)
             {
-                Debug.Log("Detected object within cone: " + hit.gameObject.name);
-
-                Vector2 direction = hit.gameObject.transform.position - visionCheck.position;
-
-                RaycastHit2D visionCheckinfo = Physics2D.Raycast(visionCheck.position, direction, visionDistance - 1f);
-                Debug.DrawLine(visionCheck.position, visionCheckinfo.point);
-
-                if (visionCheckinfo.collider)
+                Debug.Log("Player Detected");
+                isPursuing = true;
+                playerDetected = true;
+                if (stopPursuingCoroutine != null)
                 {
-                    if (visionCheckinfo.collider.gameObject.layer == 3)
-                    {
-                        Debug.Log("Player Detected");
-                        isPursuing = true;
-                        playerDetected = true;
-
-                        if (stopPursuingCoroutine != null)
-                        {
-                            StopCoroutine(stopPursuingCoroutine);
-                            stopPursuingCoroutine = null;
-                        }
-                        break;
-                    }
+                    StopCoroutine(stopPursuingCoroutine);
+                    stopPursuingCoroutine = null;
                 }
-
-                // Add your logic for when an object is detected within the cone
             }
         }
 
-
-        if (!playerDetected && isPursuing && stopPursuingCoroutine == null)
+        if(!playerDetected && isPursuing && stopPursuingCoroutine == null)
         {
             stopPursuingCoroutine = StartCoroutine(StopPursuingAfterDelay(pursuingTime));
         }
+
+        //Collider2D[] hits = Physics2D.OverlapCircleAll(visionCheck.position, visionDistance, playerLayer);
+
+        //bool playerDetected = false;
+
+        //foreach (Collider2D hit in hits)
+        //{
+        //    Vector2 directionToTarget = (hit.transform.position - visionCheck.position).normalized;
+        //    float angleToTarget = Vector2.Angle(visionCheck.right, directionToTarget);
+
+        //    if (angleToTarget < visionAngle / 2)
+        //    {
+        //        Debug.Log("Detected object within cone: " + hit.gameObject.name);
+
+        //        Vector2 direction = hit.gameObject.transform.position - visionCheck.position;
+
+        //        RaycastHit2D visionCheckinfo = Physics2D.Raycast(visionCheck.position, direction, visionDistance - 1f);
+        //        Debug.DrawLine(visionCheck.position, visionCheckinfo.point);
+
+        //        if (visionCheckinfo.collider)
+        //        {
+        //            if (visionCheckinfo.collider.gameObject.layer == 3)
+        //            {
+        //                Debug.Log("Player Detected");
+        //                isPursuing = true;
+        //                playerDetected = true;
+
+        //                if (stopPursuingCoroutine != null)
+        //                {
+        //                    StopCoroutine(stopPursuingCoroutine);
+        //                    stopPursuingCoroutine = null;
+        //                }
+        //                break;
+        //            }
+        //        }
+
+        //        // Add your logic for when an object is detected within the cone
+        //    }
+        //}
+
+
+        //if (!playerDetected && isPursuing && stopPursuingCoroutine == null)
+        //{
+        //    stopPursuingCoroutine = StartCoroutine(StopPursuingAfterDelay(pursuingTime));
+        //}
     }
 
     IEnumerator StopPursuingAfterDelay(float delay)
@@ -221,23 +299,6 @@ public class KnightAI : MonoBehaviour
         isPursuing = false;
 
         Debug.Log("Stopped pursuing player after delay");
-    }
-
-
-
-    private void OnDrawGizmos()
-    {
-        if (visionCheck != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(visionCheck.position, visionDistance);
-
-            Vector3 leftBoundary = Quaternion.Euler(0, 0, visionAngle / 2) * visionCheck.right * visionDistance;
-            Vector3 rightBoundary = Quaternion.Euler(0, 0, -visionAngle / 2) * visionCheck.right * visionDistance;
-
-            Gizmos.DrawLine(visionCheck.position, visionCheck.position + leftBoundary);
-            Gizmos.DrawLine(visionCheck.position, visionCheck.position + rightBoundary);
-        }
     }
 
 }

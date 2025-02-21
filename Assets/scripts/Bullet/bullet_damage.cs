@@ -4,7 +4,7 @@ public class bullet_damage : MonoBehaviour
 {
     public LayerMask enemyLayer;
     public LayerMask playerLayer;
-    public float damage = 10f;
+    public int damage = 30;
     public float remainingTime = 2f;
     // Update is called once per frame
     void Update()
@@ -17,14 +17,19 @@ public class bullet_damage : MonoBehaviour
         GenerateRecoil();
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject hitObject = collision.gameObject;
-        if(hitObject.layer == enemyLayer)
+
+
+        // deal damage
+        if (hitObject.GetComponent<Health>())
         {
-            // deal damage
-            Debug.Log("Hit: " + hitObject.name);
+            hitObject.GetComponent<Health>().TakeDamage(damage);
         }
+
+        Debug.Log("Hit: " + hitObject.name);
+
         Destroy(gameObject);
     }
 

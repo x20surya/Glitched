@@ -4,6 +4,7 @@ public class rochThrow : MonoBehaviour
 {
     public LayerMask GroundLayer;
     public LayerMask playerLayer;
+    public float rockDetecttionRadius = 10f;
 
     void Start()
     {
@@ -20,6 +21,18 @@ public class rochThrow : MonoBehaviour
     {
     
         if(GroundLayer == (GroundLayer | (1 << collision.gameObject.layer))){
+            // Alert Knights
+            Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, rockDetecttionRadius);
+
+            foreach(Collider2D x in hit)
+            {
+                if (x.gameObject.GetComponent<KnightAI>())
+                {
+                    x.gameObject.GetComponent<KnightAI>().isSus = true;
+                    x.gameObject.GetComponent<KnightAI>().susPos = (Vector2)transform.position;
+                }
+            }
+
             Destroy(gameObject);
         }
     }
@@ -32,5 +45,10 @@ public class rochThrow : MonoBehaviour
                 x.gameObject.GetComponent<recoil>().AddRecoil();
             }
         } 
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, rockDetecttionRadius);
     }
 }

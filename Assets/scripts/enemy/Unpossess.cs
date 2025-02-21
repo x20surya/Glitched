@@ -28,12 +28,14 @@ public class Unpossess : MonoBehaviour
 
     void UnPossess()
     {
+        
         // enable slime 
-        if(slime == null){
+        if (slime == null){
             Debug.Log("Slime not found");
             return;
         }
         slime.SetActive(true);
+        playerController.currentPlayer = GameObject.Find("main_body");
 
         // set position of slime to enemy
         Debug.Log("UnPossessing...");
@@ -43,7 +45,8 @@ public class Unpossess : MonoBehaviour
         if (GameObject.Find("main_body").GetComponent<MOTION>() != null)
         {
             GameObject.Find("main_body").GetComponent<MOTION>().enabled = true;
-            playerController.currentPlayer = GameObject.Find("main_body");
+            
+            playerController.isPossesed = false;
         }
 
         // pose camera to slime

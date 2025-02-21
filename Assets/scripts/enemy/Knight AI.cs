@@ -52,6 +52,12 @@ public class KnightAI : MonoBehaviour
 
     public Animator animator;
 
+    public bool isPossesed = false;
+
+    public PlayerPosition playerController;
+
+    public LayerMask ignoreLayers;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -63,12 +69,15 @@ public class KnightAI : MonoBehaviour
 
     void Update()
     {
-
+        isPossesed = playerController.isPossesed;
 
         animator.SetBool("isPursuing", isPursuing);
 
-        Debug.Log(isSus);
-        Debug.Log(susPos);
+        if(player == null)
+        {
+            isPursuing = false;
+        }
+
 
         if (isPursuing == false)
         {
@@ -134,7 +143,7 @@ public class KnightAI : MonoBehaviour
 
 
         }
-        else if (isPursuing)
+        else if (isPursuing && player)
         {
             LookAtPlayer();
 
@@ -169,7 +178,19 @@ public class KnightAI : MonoBehaviour
 
         }
 
-        DetectEnemy();
+        if(!isPossesed && player)
+        {
+            DetectEnemy();
+        }
+        if(isPursuing && isPossesed)
+        {
+            
+            if(stopPursuingCoroutine == null)
+            {
+                stopPursuingCoroutine = StartCoroutine(StopPursuingAfterDelay(pursuingTime));
+            }
+            
+        }
 
     }
 
@@ -222,12 +243,12 @@ public class KnightAI : MonoBehaviour
 
         Vector2 direction = player.transform.position - visionCheck.position;
 
-        RaycastHit2D visionCheckinfo = Physics2D.Raycast(visionCheck.position, direction, visionDistance - 1f);
+        RaycastHit2D visionCheckinfo = Physics2D.Raycast(visionCheck.position, direction, visionDistance - 1f, ~ignoreLayers);
         Debug.DrawLine(visionCheck.position, visionCheckinfo.point);
 
         if (visionCheckinfo.collider)
         {
-            if (visionCheckinfo.collider.gameObject.layer == 7)
+            if (visionCheckinfo.collider.gameObject.CompareTag("CurrentPlayer"))
             {
                 Debug.Log("Player Detected");
                 isPursuing = true;

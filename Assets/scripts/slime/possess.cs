@@ -61,6 +61,9 @@ public class possess : MonoBehaviour
                 hitCollider.gameObject.GetComponent<KnightMovement>().enabled = true;
                 hitCollider.gameObject.GetComponent<Health>().currentHealth = hitCollider.gameObject.GetComponent<Health>().maxHealth;
                 playerController.currentPlayer = hitCollider.gameObject;
+                playerController.isPossesed = true;
+                hitCollider.gameObject.tag = "CurrentPlayer";
+
             }
             hitCollider.gameObject.GetComponent<Unpossess>().enabled = true;
 

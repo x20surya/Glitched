@@ -8,6 +8,7 @@ TagManager:
   - PickUp
   - Vertex
   - Rock
+  - CurrentPlayer
   layers:
   - Default
   - TransparentFX

@@ -4,6 +4,7 @@ public class PlayerPosition : MonoBehaviour
 {
     public GameObject currentPlayer;
     public GameObject whoEnemiesThinkThePlayerIs;
+    public bool isPossesed = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

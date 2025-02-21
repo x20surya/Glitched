@@ -20,8 +20,6 @@ public class KnightAI : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    [SerializeField] public LayerMask playerLayer;
-
     public Transform player;
 
     public bool isFlipped = false;

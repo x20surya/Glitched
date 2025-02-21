@@ -17,7 +17,7 @@ public class Unpossess : MonoBehaviour
         
         if (isPossessed)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.Q))
             {
                 UnPossess();
             }

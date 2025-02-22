@@ -36,9 +36,11 @@ public class bullet_damage : MonoBehaviour
     void GenerateRecoil(){
         Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, 0.5f, playerLayer);
         foreach(var x in hit){
-            if(x.gameObject.CompareTag("Vertex"))
+            if(x.gameObject.CompareTag("CurrentPlayer"))
             {
-                x.gameObject.GetComponent<recoil>().AddRecoil();
+                if (x.gameObject.GetComponent<recoil>()){
+                    x.gameObject.GetComponent<recoil>().AddRecoil();
+                }
             }
         } 
     }

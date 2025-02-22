@@ -1,5 +1,6 @@
 using UnityEngine;
 using Unity.Cinemachine;
+using Unity.Mathematics;
 
 public class Unpossess : MonoBehaviour
 {
@@ -7,6 +8,15 @@ public class Unpossess : MonoBehaviour
     public bool isPossessed = false;
     public GameObject slime;
     public PlayerPosition playerController;
+    public float possessDuration = 8f;
+    private float possessTime = 8f;
+    public possessTimer possessTimer;
+
+    public void StartUnpossessTimer()
+    {
+        possessTimer.SetMaxDuration(possessDuration);
+        possessTimer.StartTimer();
+    }
     void Start()
     {
         Debug.Log("Enemy Possessed :: " + isPossessed);
@@ -15,22 +25,28 @@ public class Unpossess : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         if (isPossessed)
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 UnPossess();
             }
+            if (possessTime <= 0)
+            {
+                UnPossess();
+            }
+            possessTime = math.max(-1, possessTime - Time.deltaTime);
         }
 
     }
 
     void UnPossess()
     {
-        
+
         // enable slime 
-        if (slime == null){
+        if (slime == null)
+        {
             Debug.Log("Slime not found");
             return;
         }
@@ -45,8 +61,15 @@ public class Unpossess : MonoBehaviour
         if (GameObject.Find("main_body").GetComponent<MOTION>() != null)
         {
             GameObject.Find("main_body").GetComponent<MOTION>().enabled = true;
-            
+
             playerController.isPossesed = false;
+        }
+
+                Debug.Log("Unpossessing before checking for possess timer");
+        if (slime.GetComponent<possess>() != null)
+        {
+            Debug.Log("Setting possess timer");
+            slime.GetComponent<possess>().SetPossessTimer();
         }
 
         // pose camera to slime

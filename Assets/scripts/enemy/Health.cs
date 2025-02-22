@@ -20,13 +20,14 @@ public class Health : MonoBehaviour
     public PlayerPosition playerController;
 
     public SpriteRenderer spriteRenderer;
-
+    public HealthBar healthBar;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     // Update is called once per frame
@@ -59,6 +60,7 @@ public class Health : MonoBehaviour
             gameObject.GetComponent<BatSmallAI>().player = playerController.currentPlayer;
             gameObject.GetComponent<BatSmallAI>().isPursuing = true;
         }
+        healthBar.SetHealth(currentHealth);
         if (!isDead)
         {
             StartCoroutine(BlinkEffect());

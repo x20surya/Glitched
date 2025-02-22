@@ -1,5 +1,7 @@
 using Unity.Cinemachine;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class possess : MonoBehaviour
 {
@@ -7,21 +9,33 @@ public class possess : MonoBehaviour
     private Transform slime;
     public float possessRange = 8f;
     public LayerMask EnemyLayer;
+    public float possessRate = 3f;
+    private float possessTime = 0f;
 
     public PlayerPosition playerController;
+    public possessTimer possessTimer;
     void Start()
     {
         slime = GameObject.Find("main_body").transform;
         EnemyLayer = LayerMask.GetMask("Enemy");
+        possessTimer.SetMaxDuration(possessRate);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        possessTime = math.max(-1, possessTime - Time.deltaTime);
+        if (Input.GetKeyDown(KeyCode.E) && possessTime <= 0)
         {
             checkForPossess();
         }
+    }
+    public void SetPossessTimer()
+    {
+        Debug.Log("Setting possess timer to " + possessRate);
+        possessTime = possessRate;
+        possessTimer.SetMaxDuration(possessRate);
+        possessTimer.StartTimer();
     }
 
     void checkForPossess()
@@ -50,7 +64,6 @@ public class possess : MonoBehaviour
 
         if (hitCollider.gameObject.GetComponent<Health>().isDead)
         {
-            Debug.Log("Possess: " + hitCollider.name);
             // enable move script in enemy
             if (hitCollider.gameObject.GetComponent<MOTION>())
             {
@@ -65,15 +78,17 @@ public class possess : MonoBehaviour
                 hitCollider.gameObject.tag = "CurrentPlayer";
 
             }
-            if (hitCollider.gameObject.GetComponent<SpiderMovement>()) { 
+            if (hitCollider.gameObject.GetComponent<SpiderMovement>())
+            {
                 hitCollider.gameObject.GetComponent<SpiderMovement>().enabled = true;
                 hitCollider.gameObject.GetComponent<WebSwing>().enabled = true;
-                hitCollider.gameObject.GetComponent<Health>().currentHealth = hitCollider.gameObject.GetComponent <Health>().maxHealth;
+                hitCollider.gameObject.GetComponent<Health>().currentHealth = hitCollider.gameObject.GetComponent<Health>().maxHealth;
                 playerController.currentPlayer = hitCollider.gameObject;
                 playerController.isPossesed = true;
                 hitCollider.gameObject.tag = "CurrentPlayer";
             }
-            if (hitCollider.gameObject.GetComponent<BatMovement>()) { 
+            if (hitCollider.gameObject.GetComponent<BatMovement>())
+            {
                 hitCollider.gameObject.GetComponent<BatMovement>().enabled = true;
                 hitCollider.gameObject.GetComponent<Health>().currentHealth = hitCollider.gameObject.GetComponent<Health>().maxHealth;
                 playerController.currentPlayer = hitCollider.gameObject;
@@ -103,7 +118,7 @@ public class possess : MonoBehaviour
 
             hitCollider.gameObject.GetComponent<Unpossess>().isPossessed = true;
             hitCollider.gameObject.GetComponent<Unpossess>().slime = gameObject;
-
+            hitCollider.gameObject.GetComponent<Unpossess>().StartUnpossessTimer();
 
             // disable slime
             gameObject.SetActive(false);

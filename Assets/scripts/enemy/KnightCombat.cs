@@ -5,6 +5,8 @@ public class KnightCombat : MonoBehaviour
     public Transform attackPos;
     public float attackRange;
     public LayerMask AttackLayerForAI;
+
+    public PlayerPosition playerController;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,25 +22,24 @@ public class KnightCombat : MonoBehaviour
         {
             foreach (Collider2D col in colInfo)
             {
-                if (gameObject.CompareTag("CurrentPlayer"))
+                if (gameObject == playerController.currentPlayer)
                 {
-                    
-                    if (((AttackLayerForAI.value & (1 << col.gameObject.layer)) != 0) && !col.gameObject.CompareTag("CurrentPlayer"))
+                    if (col.gameObject != gameObject)
                     {
-                        col.GetComponent<Health>().TakeDamage(30);
+                        if (col.GetComponent<Health>() != null)
+                        {
+                            col.GetComponent<Health>().TakeDamage(30);
+                        }
                     }
-
                 }
                 else
                 {
-                    
                     if (col.CompareTag("CurrentPlayer"))
                     {
                         if (col.GetComponent<Health>() != null)
                         {
                             col.GetComponent<Health>().TakeDamage(30);
                         }
-                        Debug.Log("attack hit");
                     }
                 }
             }

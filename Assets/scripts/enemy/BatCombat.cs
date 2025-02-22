@@ -24,22 +24,42 @@ public class BatCombat : MonoBehaviour
             foreach (Collider2D col in colInfo)
             {
 
+                if(gameObject == playerController.currentPlayer)
+                {
+                    if(col.gameObject != gameObject)
+                    {
+                        if (col.GetComponent<Health>() != null)
+                        {
+                            col.GetComponent<Health>().TakeDamage(30);
+                        }
+                    }
+                }
+                else
+                {
+                    if (col.CompareTag("CurrentPlayer"))
+                    {
+                        if (col.GetComponent<Health>() != null)
+                        {
+                            col.GetComponent<Health>().TakeDamage(30);
+                        }
+                    }
+                }
 
-                if (col.CompareTag("CurrentPlayer") && !playerController.isPossesed)
-                {
-                    if (col.GetComponent<Health>() != null)
-                    {
-                        col.GetComponent<Health>().TakeDamage(30);
-                    }
-                    Debug.Log("attack hit");
-                }
-                else if (col.gameObject != gameObject)
-                {
-                    if (col.GetComponent<Health>() != null)
-                    {
-                        col.GetComponent<Health>().TakeDamage(30);
-                    }
-                }
+                //if (col.CompareTag("CurrentPlayer") && !playerController.isPossesed)
+                //{
+                //    if (col.GetComponent<Health>() != null)
+                //    {
+                //        col.GetComponent<Health>().TakeDamage(30);
+                //    }
+                //    Debug.Log("attack hit");
+                //}
+                //else if (col.gameObject != gameObject)
+                //{
+                //    if (col.GetComponent<Health>() != null)
+                //    {
+                //        col.GetComponent<Health>().TakeDamage(30);
+                //    }
+                //}
 
             }
         }

@@ -23,21 +23,26 @@ public class SpiderCombat : MonoBehaviour
         {
             foreach(Collider2D col in colInfo)
             {
-                
 
-                if (col.CompareTag("CurrentPlayer") && !playerController.isPossesed)
+
+                if (gameObject == playerController.currentPlayer)
                 {
-                    if (col.GetComponent<Health>() != null)
+                    if (col.gameObject != gameObject)
                     {
-                        col.GetComponent<Health>().TakeDamage(30);
+                        if (col.GetComponent<Health>() != null)
+                        {
+                            col.GetComponent<Health>().TakeDamage(30);
+                        }
                     }
-                    Debug.Log("attack hit");
                 }
-                else if(col.gameObject != gameObject)
-                { 
-                    if(col.GetComponent<Health>() != null)
+                else
+                {
+                    if (col.CompareTag("CurrentPlayer"))
                     {
-                        col.GetComponent <Health>().TakeDamage(30);
+                        if (col.GetComponent<Health>() != null)
+                        {
+                            col.GetComponent<Health>().TakeDamage(30);
+                        }
                     }
                 }
 

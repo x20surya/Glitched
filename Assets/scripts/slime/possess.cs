@@ -73,6 +73,7 @@ public class possess : MonoBehaviour
             {
                 hitCollider.gameObject.GetComponent<KnightMovement>().enabled = true;
                 hitCollider.gameObject.GetComponent<Health>().currentHealth = hitCollider.gameObject.GetComponent<Health>().maxHealth;
+                hitCollider.gameObject.GetComponent<Health>().isDead = true;
                 playerController.currentPlayer = hitCollider.gameObject;
                 playerController.isPossesed = true;
                 hitCollider.gameObject.tag = "CurrentPlayer";
@@ -83,6 +84,7 @@ public class possess : MonoBehaviour
                 hitCollider.gameObject.GetComponent<SpiderMovement>().enabled = true;
                 hitCollider.gameObject.GetComponent<WebSwing>().enabled = true;
                 hitCollider.gameObject.GetComponent<Health>().currentHealth = hitCollider.gameObject.GetComponent<Health>().maxHealth;
+                hitCollider.gameObject.GetComponent<Health>().isDead = true;
                 playerController.currentPlayer = hitCollider.gameObject;
                 playerController.isPossesed = true;
                 hitCollider.gameObject.tag = "CurrentPlayer";
@@ -91,6 +93,7 @@ public class possess : MonoBehaviour
             {
                 hitCollider.gameObject.GetComponent<BatMovement>().enabled = true;
                 hitCollider.gameObject.GetComponent<Health>().currentHealth = hitCollider.gameObject.GetComponent<Health>().maxHealth;
+                hitCollider.gameObject.GetComponent<Health>().isDead = true;
                 playerController.currentPlayer = hitCollider.gameObject;
                 playerController.isPossesed = true;
                 hitCollider.gameObject.tag = "CurrentPlayer";

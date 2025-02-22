@@ -64,10 +64,6 @@ public class MOTION : MonoBehaviour
             }
 
         }
-        else
-        {
-            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
-        }
         if (CheckGround())
         {
             if (Input.GetKeyDown(KeyCode.Space)) rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);

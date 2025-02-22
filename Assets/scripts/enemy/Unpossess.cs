@@ -19,7 +19,6 @@ public class Unpossess : MonoBehaviour
     }
     void Start()
     {
-        Debug.Log("Enemy Possessed :: " + isPossessed);
     }
 
     // Update is called once per frame
@@ -47,14 +46,12 @@ public class Unpossess : MonoBehaviour
         // enable slime 
         if (slime == null)
         {
-            Debug.Log("Slime not found");
             return;
         }
         slime.SetActive(true);
         playerController.currentPlayer = GameObject.Find("main_body");
 
         // set position of slime to enemy
-        Debug.Log("UnPossessing...");
         slime.transform.position = gameObject.transform.position + new Vector3(0, 10, 0);
 
         // enable move script in slime
@@ -64,11 +61,8 @@ public class Unpossess : MonoBehaviour
 
             playerController.isPossesed = false;
         }
-
-                Debug.Log("Unpossessing before checking for possess timer");
         if (slime.GetComponent<possess>() != null)
         {
-            Debug.Log("Setting possess timer");
             slime.GetComponent<possess>().SetPossessTimer();
         }
 

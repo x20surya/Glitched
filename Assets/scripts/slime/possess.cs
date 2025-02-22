@@ -32,7 +32,6 @@ public class possess : MonoBehaviour
     }
     public void SetPossessTimer()
     {
-        Debug.Log("Setting possess timer to " + possessRate);
         possessTime = possessRate;
         possessTimer.SetMaxDuration(possessRate);
         possessTimer.StartTimer();

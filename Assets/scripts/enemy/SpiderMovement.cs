@@ -25,6 +25,8 @@ public class SpiderMovement : MonoBehaviour
         if(moveInput != 0 )
         {
             animator.SetBool("isRunning", true);
+            movement = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+            rb.linearVelocity = movement;
         }
         else
         {
@@ -44,8 +46,7 @@ public class SpiderMovement : MonoBehaviour
             animator.SetTrigger("Attack");
         }
 
-        movement = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
-        rb.linearVelocity = movement;
+        
 
     }
     void Flip()

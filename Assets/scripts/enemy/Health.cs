@@ -107,6 +107,12 @@ public class Health : MonoBehaviour
             animator.SetBool("isDead", true);
             isDead = true;
         }
+        if (gameObject.GetComponent<BigSpiderAI>()) {
+            gameObject.GetComponent<BigSpiderAI>().enabled = false;
+            animator.SetTrigger("deadAnim");
+            animator.SetBool("isDead", true);
+            isDead = true;
+        }
   
     }
 

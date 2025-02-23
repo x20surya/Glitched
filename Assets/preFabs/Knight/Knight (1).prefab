@@ -921,7 +921,7 @@ MonoBehaviour:
   isPossessed: 0
   slime: {fileID: 0}
   playerController: {fileID: 0}
-  possessDuration: 8
+  possessDuration: 20
   possessTimer: {fileID: 0}
 --- !u!114 &47867680676738182
 MonoBehaviour:

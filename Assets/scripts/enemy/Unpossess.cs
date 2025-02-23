@@ -16,6 +16,7 @@ public class Unpossess : MonoBehaviour
     {
         possessTimer.SetMaxDuration(possessDuration);
         possessTimer.StartTimer();
+        possessTime = possessDuration;
     }
     void Start()
     {
@@ -52,7 +53,7 @@ public class Unpossess : MonoBehaviour
         playerController.currentPlayer = GameObject.Find("main_body");
 
         // set position of slime to enemy
-        slime.transform.position = gameObject.transform.position + new Vector3(0, 10, 0);
+        slime.transform.position = gameObject.transform.position;
 
         // enable move script in slime
         if (GameObject.Find("main_body").GetComponent<MOTION>() != null)
@@ -72,6 +73,13 @@ public class Unpossess : MonoBehaviour
         {
             vcam.Follow = GameObject.Find("main_body").transform;
             vcam.LookAt = GameObject.Find("main_body").transform;
+        }
+
+        if (GameObject.Find("main_body").GetComponent<Health>() != null)
+        {
+            GameObject.Find("main_body").GetComponent<Health>().currentHealth += 20;
+
+            playerController.isPossesed = false;
         }
 
         // destroy enemy

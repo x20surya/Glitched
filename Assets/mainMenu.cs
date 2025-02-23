@@ -10,6 +10,6 @@ public class mainMenu : MonoBehaviour
     }
     public void StartGame(){
         Debug.Log("Starting Game...");
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("Level2");
     }
 }

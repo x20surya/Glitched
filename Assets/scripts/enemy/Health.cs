@@ -30,10 +30,11 @@ public class Health : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
     }
 
+
     // Update is called once per frame
     void Update()
     {
-
+        healthBar.SetHealth(currentHealth);
     }
 
     public void TakeDamage(int damage)
@@ -72,7 +73,14 @@ public class Health : MonoBehaviour
     }
 
     void Die() {
-
+        if(gameObject.CompareTag("CurrentPlayer")){
+            if(gameObject.GetComponent<Health>() != null)
+            {
+                gameObject.GetComponent<Health>().isDead = true;
+                if(gameObject.GetComponent<MOTION>() != null) gameObject.GetComponent<MOTION>().enabled = false;
+                GameObject.Find("GameManager").GetComponent<GameManager>().DeathMenu();
+            }
+        }
         if (gameObject.GetComponent<KnightAI>() != null) {
             gameObject.GetComponent<KnightAI>().enabled = false;
             animator.SetTrigger("deadAnim");

@@ -10,6 +10,7 @@ public class Abilities : MonoBehaviour
     public bool canSwing = false;
     public bool canShoot = true;
     public bool canGlide = true;
+    public bool hasKey = false;
 
 
     void Start()

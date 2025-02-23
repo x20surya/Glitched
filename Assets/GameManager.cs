@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     public bool isDead = false;
     public GameObject pausePanel;
     public GameObject deathPanel;
+    public GameObject levelCleared;
     public GameObject HUD;
     void Update()
     {
@@ -35,10 +36,9 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 Time.timeScale = 1;
             }
-            else if(Input.GetKeyDown(KeyCode.Escape))
+            else if(Input.GetKeyDown(KeyCode.M))
             {
                 MainMenu();
-                Time.timeScale = 1;
             }
         }
     }
@@ -72,5 +72,11 @@ public class GameManager : MonoBehaviour
     public void ExitGame()
     {
         Debug.Log("Exiting Game...");
+    }
+
+    public void newLevel(){
+        HUD.SetActive(false);
+        levelCleared.SetActive(true);
+        Time.timeScale = 0;
     }
 }

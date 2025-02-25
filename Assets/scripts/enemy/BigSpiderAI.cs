@@ -146,18 +146,26 @@ public class BigSpiderAI : MonoBehaviour
 
         foreach (var hit in hits)
         {
-            if (hit.gameObject != gameObject && !hit.gameObject.GetComponent<Health>().isDead)
-            {
-                currentTarget = hit.gameObject;
-                isPursuing = true;
-                targetDetected = true;
 
-                if (stopPursuingCoroutine != null)
+            if (hit.gameObject.GetComponent<Health>() != null)
+            {
+                if (hit.gameObject != gameObject && !hit.gameObject.GetComponent<Health>().isDead)
                 {
-                    StopCoroutine(stopPursuingCoroutine);
-                    stopPursuingCoroutine = null;
+
+                    if (!hit.gameObject.GetComponent<Health>().isDead)
+                    {
+                        currentTarget = hit.gameObject;
+                        isPursuing = true;
+                        targetDetected = true;
+
+                        if (stopPursuingCoroutine != null)
+                        {
+                            StopCoroutine(stopPursuingCoroutine);
+                            stopPursuingCoroutine = null;
+                        }
+                        break;
+                    }
                 }
-                break;
             }
         }
 

@@ -166,4 +166,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knifeSpeed: 100
-  knifeDamage: 40
+  knifeDamage: 25

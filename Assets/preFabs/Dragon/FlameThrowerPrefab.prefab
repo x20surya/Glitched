@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flamespeed: 100
-  damage: 10
+  damage: 30
 --- !u!1 &7373355544503572032
 GameObject:
   m_ObjectHideFlags: 0

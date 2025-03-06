@@ -18,6 +18,7 @@ public class Health : MonoBehaviour
     public int blinkCount = 5;
 
     public PlayerPosition playerController;
+    public GameObject victoryPanel;
 
     public SpriteRenderer spriteRenderer;
     public HealthBar healthBar;
@@ -160,10 +161,15 @@ public class Health : MonoBehaviour
             animator.SetTrigger("deadAnim");
             animator.SetBool("isDead", true);
             isDead = true;
+            Invoke("Victory", 2f);
         }
 
         isDead = true;
   
+    }
+
+    void Victory(){
+        victoryPanel.GetComponent<Victory>().OnVictory();
     }
 
     private IEnumerator BlinkEffect()

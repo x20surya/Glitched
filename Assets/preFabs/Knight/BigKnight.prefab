@@ -59,7 +59,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -386100005
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &4893947747148373378
@@ -878,7 +878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2922baa3b3ac6147ad06778ff490fd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 1000
   isDead: 0
   currentHealth: 0
   alertRadius: 10.28
@@ -886,8 +886,13 @@ MonoBehaviour:
   blinkDuration: 0.1
   blinkCount: 5
   playerController: {fileID: 0}
+  victoryPanel: {fileID: 0}
   spriteRenderer: {fileID: 7412060170870352090}
   healthBar: {fileID: 3794292374585734800}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  detectionRadius: 10
 --- !u!114 &7345792307460104320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1257,8 +1262,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -386100005
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -3753825769889500098, guid: 9d5cec510bc0beb49ac83cd260e23c64, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1469,6 +1474,10 @@ PrefabInstance:
     - target: {fileID: 4911939363861077875, guid: 454a4f0c5a6aeb3468098512823fd1d6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5447124173265007402, guid: 454a4f0c5a6aeb3468098512823fd1d6, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -386100005
       objectReference: {fileID: 0}
     - target: {fileID: 7077240691541369972, guid: 454a4f0c5a6aeb3468098512823fd1d6, type: 3}
       propertyPath: m_AnchorMax.x

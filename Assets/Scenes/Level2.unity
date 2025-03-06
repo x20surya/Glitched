@@ -3504,7 +3504,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 34
-    OrthographicSize: 17.92382
+    OrthographicSize: 37.5
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -5364,6 +5364,7 @@ MonoBehaviour:
   blinkDuration: 0.1
   blinkCount: 5
   playerController: {fileID: 2100749021}
+  victoryPanel: {fileID: 0}
   spriteRenderer: {fileID: 431122527}
   healthBar: {fileID: 347901680}
   playerLayer:
@@ -6608,7 +6609,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 17.92382
+  orthographic size: 37.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -7615,7 +7616,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -386100005
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &635629617
@@ -8005,7 +8006,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -62.3, y: 7.4}
+  m_AnchoredPosition: {x: -62.51, y: 7.92}
   m_SizeDelta: {x: 7.37, y: 1.1099}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &668304150
@@ -8028,7 +8029,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hold LeftCtrl and point to where you want to web swing
+  m_text: Hold Middle Mouse Button and point to where you want to web swing
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -18887,6 +18888,7 @@ MonoBehaviour:
   blinkDuration: 0.1
   blinkCount: 5
   playerController: {fileID: 2100749021}
+  victoryPanel: {fileID: 0}
   spriteRenderer: {fileID: 1533036644}
   healthBar: {fileID: 1510637360}
   playerLayer:

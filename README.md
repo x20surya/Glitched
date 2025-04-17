@@ -2,7 +2,7 @@
 
 ## How To access
 
--**Download the the source in .zip file and use open it with unity**
+- **Download the the source in .zip file and use open it with unity**
 
 ## Release
 
